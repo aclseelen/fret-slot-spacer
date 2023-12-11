@@ -1,4 +1,4 @@
-package eu.acls.fretslotspacer;
+package eu.acls.fretslotspacer.entities;
 
 import java.util.ArrayList;
 import java.util.List;

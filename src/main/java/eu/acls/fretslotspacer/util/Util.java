@@ -1,4 +1,4 @@
-package eu.acls.fretslotspacer;
+package eu.acls.fretslotspacer.util;
 
 public class Util {
 

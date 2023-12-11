@@ -1,5 +1,7 @@
 package eu.acls.fretslotspacer;
 
+import eu.acls.fretslotspacer.entities.*;
+import eu.acls.fretslotspacer.util.DefaultTsDistanceCollections;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +59,7 @@ class CalculatorTest {
   void calculate_25_Meantone() {
     ScaleLength scaleLength = new ScaleLength(25.0, LengthUnit.INCHES);
 
-    List<TsDistance> tsFretsDefined = defineFrets();
+    List<TsDistance> tsFretsDefined = DefaultTsDistanceCollections.getStandardVersionSingleOptionAboveOctave21();
 
     Temperament2D temperament = new Temperament2D(2.0, 0.60628, tsFretsDefined);
     Calculator calculator = new Calculator(scaleLength, temperament);
@@ -66,7 +68,8 @@ class CalculatorTest {
 
     List<Double> fretPositions = result.getFretPositions();
 
-    assertEquals(6, fretPositions.size());
+    // 21 frets corresponding to 12-TET of which 7 are doubled:
+    assertEquals(28, fretPositions.size());
 
     assertEquals(27.29053947, fretPositions.get(0));
     assertEquals(41.53325424, fretPositions.get(1));
@@ -76,26 +79,6 @@ class CalculatorTest {
     assertEquals(91.44820689, fretPositions.get(3));
     assertEquals(104.18727655, fretPositions.get(4));
 
-    assertEquals(317.5, fretPositions.get(5));
+    assertEquals(317.5, fretPositions.get(18));
   }
-
-  private List<TsDistance> defineFrets() {
-
-    List<TsDistance> tsFretsDefined = new ArrayList<>();
-
-    tsFretsDefined.add(new TsDistance(1, -1));
-    tsFretsDefined.add(new TsDistance(0, 1));
-
-    tsFretsDefined.add(new TsDistance(1, 0));
-
-    tsFretsDefined.add(new TsDistance(2, -1));
-    tsFretsDefined.add(new TsDistance(1, 1));
-
-    //---//
-
-    tsFretsDefined.add(new TsDistance(5, 2));
-
-     return tsFretsDefined;
-  }
-
 }

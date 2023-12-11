@@ -1,4 +1,6 @@
-package eu.acls.fretslotspacer;
+package eu.acls.fretslotspacer.entities;
+
+import eu.acls.fretslotspacer.util.Util;
 
 public class ScaleLength {
 

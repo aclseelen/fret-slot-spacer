@@ -1,4 +1,4 @@
-package eu.acls.fretslotspacer;
+package eu.acls.fretslotspacer.entities;
 
 public record TsDistance(int tones, int semitones) {
 

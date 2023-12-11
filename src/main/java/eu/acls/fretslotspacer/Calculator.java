@@ -1,5 +1,8 @@
 package eu.acls.fretslotspacer;
 
+import eu.acls.fretslotspacer.entities.*;
+import eu.acls.fretslotspacer.util.Util;
+
 public class Calculator {
 
   private ScaleLength scaleLength;
