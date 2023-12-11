@@ -3,6 +3,8 @@ package eu.acls.fretslotspacer;
 import eu.acls.fretslotspacer.entities.*;
 import eu.acls.fretslotspacer.util.Util;
 
+import java.util.List;
+
 public class Calculator {
 
   private ScaleLength scaleLength;
@@ -36,10 +38,19 @@ public class Calculator {
     double referenceInterval = temperament.getReferenceIntervalFrequencyRelation();
 
     for (TsDistance tsDistance : temperament2D.getTsFretsDefined()) {
-      double currentFretPos = Util.truncateDecimal(
-        scaleLengthMm - scaleLengthMm / Math.pow(referenceInterval, (tsDistance.getTones() + tsDistance.getSemitones() * semitoneRatio) / (5 + 2 * semitoneRatio)), 8
+      double currentFretPosMm = scaleLengthMm - scaleLengthMm / Math.pow(referenceInterval, (tsDistance.getTones() + tsDistance.getSemitones() * semitoneRatio) / (5 + 2 * semitoneRatio));
+
+      double currentFretPosMmTrunc3 = Util.truncateDecimal(currentFretPosMm, 3);
+      double currentFretPosInchTrunc3 = Util.truncateDecimal(Util.millimetersToInches(currentFretPosMm), 3);
+
+      List<Integer> infoList = List.of(
+        tsDistance.getTones(),
+        tsDistance.getSemitones()
       );
-      result.getFretPositions().add(currentFretPos);
+
+      ResultSourceInfo sourceInfo = new ResultSourceInfo(infoList, TemperamentType.TWO_DIMENSIONAL);
+      ResultEntry entry = new ResultEntry(currentFretPosMmTrunc3, currentFretPosInchTrunc3, sourceInfo);
+      result.getResultEntries().add(entry);
     }
 
     return result;
@@ -57,10 +68,18 @@ public class Calculator {
 
     int nFrets = temperamentTET.getTotalNumberOfFrets();
     for (int i = 0; i < nFrets; i++) {
-      double currentFretPos = Util.truncateDecimal(
-        scaleLengthMm - scaleLengthMm / Math.pow(referenceInterval, (i + 1.0) / numberOfSteps), 8
+
+      double currentFretPosMm = scaleLengthMm - scaleLengthMm / Math.pow(referenceInterval, (i + 1.0) / numberOfSteps);
+
+      double currentFretPosMmTrunc8 = Util.truncateDecimal(currentFretPosMm, 3);
+      double currentFretPosInchTrunc3 = Util.truncateDecimal(Util.millimetersToInches(currentFretPosMm), 3);
+
+      List<Integer> infoList = List.of(
+        i + 1 // fret number
       );
-      result.getFretPositions().add(currentFretPos);
+      ResultSourceInfo sourceInfo = new ResultSourceInfo(infoList, TemperamentType.TWO_DIMENSIONAL);
+      ResultEntry entry = new ResultEntry(currentFretPosMmTrunc8, currentFretPosInchTrunc3, sourceInfo);
+      result.getResultEntries().add(entry);
     }
     return result;
   }

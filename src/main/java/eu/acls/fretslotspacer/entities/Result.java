@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Result {
 
-  private final List<Double> fretPositions = new ArrayList<>();
+  private final List<ResultEntry> resultEntries = new ArrayList<>();
 
-  public List<Double> getFretPositions() {
-    return fretPositions;
+  public List<ResultEntry> getResultEntries() {
+    return resultEntries;
   }
 }

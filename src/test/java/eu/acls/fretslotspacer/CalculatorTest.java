@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,13 +28,13 @@ class CalculatorTest {
 
     Result result = calculator.calculate();
 
-    List<Double> fretPositions = result.getFretPositions();
+    List<ResultEntry> resultEntries = result.getResultEntries();
 
-    assertEquals(21, fretPositions.size());
-    assertEquals(35.63981145, fretPositions.get(0));
-    assertEquals(69.27931398, fretPositions.get(1));
-    assertEquals(101.03077631, fretPositions.get(2));
-    assertEquals(317.5, fretPositions.get(11));
+    assertEquals(21, resultEntries.size());
+    assertEquals(35.64, resultEntries.get(0).getFretPosMm());
+    assertEquals(69.279, resultEntries.get(1).getFretPosMm());
+    assertEquals(101.031, resultEntries.get(2).getFretPosMm());
+    assertEquals(317.5, resultEntries.get(11).getFretPosMm());
   }
 
   @Test
@@ -46,13 +45,13 @@ class CalculatorTest {
 
     Result result = calculator.calculate();
 
-    List<Double> fretPositions = result.getFretPositions();
+    List<ResultEntry> resultEntries = result.getResultEntries();
 
-    assertEquals(22, fretPositions.size());
-    assertEquals(36.35260768, fretPositions.get(0));
-    assertEquals(70.66490026, fretPositions.get(1));
-    assertEquals(103.05139184, fretPositions.get(2));
-    assertEquals(323.85, fretPositions.get(11));
+    assertEquals(22, resultEntries.size());
+    assertEquals(36.353, resultEntries.get(0).getFretPosMm());
+    assertEquals(70.665, resultEntries.get(1).getFretPosMm());
+    assertEquals(103.051, resultEntries.get(2).getFretPosMm());
+    assertEquals(323.85, resultEntries.get(11).getFretPosMm());
   }
 
   @Test
@@ -66,19 +65,23 @@ class CalculatorTest {
 
     Result result = calculator.calculate();
 
-    List<Double> fretPositions = result.getFretPositions();
+    List<ResultEntry> resultEntries = result.getResultEntries();
 
     // 21 frets corresponding to 12-TET of which 7 are doubled:
-    assertEquals(28, fretPositions.size());
+    assertEquals(28, resultEntries.size());
 
-    assertEquals(27.29053947, fretPositions.get(0));
-    assertEquals(41.53325424, fretPositions.get(1));
+    assertEquals(27.291, resultEntries.get(0).getFretPosMm());
+    assertEquals(41.533, resultEntries.get(1).getFretPosMm());
 
-    assertEquals(67.03880959, fretPositions.get(2));
+    assertEquals(67.039, resultEntries.get(2).getFretPosMm());
 
-    assertEquals(91.44820689, fretPositions.get(3));
-    assertEquals(104.18727655, fretPositions.get(4));
+    assertEquals(91.448, resultEntries.get(3).getFretPosMm());
+    assertEquals(104.187, resultEntries.get(4).getFretPosMm());
 
-    assertEquals(317.5, fretPositions.get(18));
+    assertEquals(317.5, resultEntries.get(18).getFretPosMm());
+
+    for (ResultEntry resultEntry : resultEntries) {
+      System.out.println(resultEntry.fretPosMm + "\t\t" + resultEntry.fretPosInch + "\t\t\t" + resultEntry.sourceInfo.infoList());
+    }
   }
 }
