@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Calculator {
 
-  private ScaleLength scaleLength;
-  private Temperament temperament;
+  private final ScaleLength scaleLength;
+  private final Temperament temperament;
 
   public Calculator(ScaleLength scaleLength, Temperament temperament) {
     this.scaleLength = scaleLength;

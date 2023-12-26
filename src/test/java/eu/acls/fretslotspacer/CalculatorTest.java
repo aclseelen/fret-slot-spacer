@@ -79,9 +79,5 @@ class CalculatorTest {
     assertEquals(104.187, resultEntries.get(4).getFretPosMm());
 
     assertEquals(317.5, resultEntries.get(18).getFretPosMm());
-
-    for (ResultEntry resultEntry : resultEntries) {
-      System.out.println(resultEntry.fretPosMm + "\t\t" + resultEntry.fretPosInch + "\t\t\t" + resultEntry.sourceInfo.infoList());
-    }
   }
 }
